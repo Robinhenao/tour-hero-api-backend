@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -36,11 +37,24 @@ public class HeroService {
         return heroRepository.findAll();
     }
 
+    public void searchHeroe(){
+
+    }
+
     public void deleteHeroe(Integer id) {
         if (!heroRepository.existsById(id)) {
             throw new BusinessException("El héroe no existe");
         }
         heroRepository.deleteById(id);
+    }
+
+    public Hero addheroe(Hero hero){
+        System.out.println("antes guardo"+hero.getName());
+        return heroRepository.save(hero);
+    }
+
+    public void updateheroe(){
+
     }
 
 }

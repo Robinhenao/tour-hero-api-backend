@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,7 +54,7 @@ public class HeroController {
             @ApiResponse(code = 400, message = "La petición es invalida"),
             @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
     public void searchHeroes(){
-
+        return heroService.
     }
 */
 
@@ -66,7 +65,7 @@ public class HeroController {
             @ApiResponse(code = 400, message = "La petición es invalida"),
             @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
     public void updateHero(){
-
+        this.heroService.updateheroe();
     }
 
 
@@ -77,8 +76,8 @@ public class HeroController {
             @ApiResponse(code = 200, message = "Heroe agregado existosamente"),
             @ApiResponse(code = 400, message = "La petición es invalida"),
             @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
-    public void addHero( ){//@RequestBody
-
+    public Hero addHero(@RequestBody Hero hero){//@RequestBody
+        return this.heroService.addheroe(hero);
     }
 
 
