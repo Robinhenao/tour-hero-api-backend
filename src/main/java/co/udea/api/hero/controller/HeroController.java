@@ -64,8 +64,8 @@ public class HeroController {
             @ApiResponse(code = 200, message = "Heroe actualizado existosamente"),
             @ApiResponse(code = 400, message = "La petición es invalida"),
             @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
-    public void updateHero(){
-        this.heroService.updateheroe();
+    public void updateHero(@RequestBody Hero hero){
+        this.heroService.updateheroe(hero);
     }
 
 

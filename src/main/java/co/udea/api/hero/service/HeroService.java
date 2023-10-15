@@ -49,12 +49,16 @@ public class HeroService {
     }
 
     public Hero addheroe(Hero hero){
-        System.out.println("antes guardo"+hero.getName());
         return heroRepository.save(hero);
     }
 
-    public void updateheroe(){
+    public void updateheroe(Hero hero){
+        heroRepository.findById(hero.getId()).ifPresent(hero1 -> {
+            hero1.setName(hero.getName());
+            heroRepository.save(hero1);
+        });
 
     }
 
 }
+
