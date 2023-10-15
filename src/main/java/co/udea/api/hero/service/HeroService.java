@@ -6,6 +6,8 @@ import co.udea.api.hero.repository.HeroRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +20,9 @@ public class HeroService {
     public HeroService(HeroRepository heroRepository){
         this.heroRepository = heroRepository;
     }
+
+
+
     public Hero getHero(Integer id){
         Optional<Hero> optionalHero = heroRepository.findById(id);
         if(!optionalHero.isPresent()){
@@ -25,6 +30,17 @@ public class HeroService {
             throw new BusinessException("El heroe no existe");
         }
         return optionalHero.get();
+    }
+
+    public List<Hero> listHeroes() {
+        return heroRepository.findAll();
+    }
+
+    public void deleteHeroe(Integer id) {
+        if (!heroRepository.existsById(id)) {
+            throw new BusinessException("El héroe no existe");
+        }
+        heroRepository.deleteById(id);
     }
 
 }

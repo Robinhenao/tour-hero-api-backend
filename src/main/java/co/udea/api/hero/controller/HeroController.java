@@ -8,10 +8,10 @@ import org.springframework.http.ResponseEntity;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/heroes")
@@ -35,4 +35,65 @@ public class HeroController {
         log.info("Rest request buscar heroe por id: "+ id);
         return ResponseEntity.ok(heroService.getHero(id));
     }
+
+
+    @GetMapping
+    @ApiOperation(value = "listar heroes",  response = Hero.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Heroes encontrados existosamente"),
+            @ApiResponse(code = 400, message = "La petición es invalida"),
+            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
+    public List<Hero> getHeroes(){
+        return heroService.listHeroes();
+    }
+
+    /*
+    @GetMapping
+    @ApiOperation(value = "listar  busqueda",  response = Hero.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Heroes encontrados existosamente"),
+            @ApiResponse(code = 400, message = "La petición es invalida"),
+            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
+    public void searchHeroes(){
+
+    }
+*/
+
+    @PutMapping
+    @ApiOperation(value = "Actualizar heroe",  response = Hero.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Heroe actualizado existosamente"),
+            @ApiResponse(code = 400, message = "La petición es invalida"),
+            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
+    public void updateHero(){
+
+    }
+
+
+    @PostMapping
+    //@Transactional
+    @ApiOperation(value = "Agregar heroe",  response = Hero.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Heroe agregado existosamente"),
+            @ApiResponse(code = 400, message = "La petición es invalida"),
+            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
+    public void addHero( ){//@RequestBody
+
+    }
+
+
+    @DeleteMapping("{id}")
+    @ApiOperation(value = "eliminar heroe",  response = Hero.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Heroes eliminado existosamente"),
+            @ApiResponse(code = 400, message = "La petición es invalida"),
+            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
+    public void deleteHero(@PathVariable Integer id){
+        this.heroService.deleteHeroe(id);
+    }
+
+
+
+
+
 }
