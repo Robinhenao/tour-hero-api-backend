@@ -30,9 +30,21 @@ public class HeroController {
             @ApiResponse(code = 200, message = "Hero encontrado existosamente"),
             @ApiResponse(code = 400, message = "La petición es invalida"),
             @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
-    public ResponseEntity<Hero> getHero(@PathVariable Integer id){
+    public ResponseEntity<Hero> getHero(@PathVariable("id") Integer id){
         log.info("Rest request buscar heroe por id: "+ id);
         return ResponseEntity.ok(heroService.getHero(id));
+    }
+
+
+    @GetMapping("/")
+    @ApiOperation(value = "listar  busqueda",  response = Hero.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Heroes encontrados existosamente"),
+            @ApiResponse(code = 400, message = "La petición es invalida"),
+            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
+    public List<Hero> searchHeroes(@RequestParam("name") String term){
+        System.out.println(term+"  esto es el termino");
+        return heroService.searchHeroe(term);
     }
 
 
@@ -46,17 +58,6 @@ public class HeroController {
         return heroService.listHeroes();
     }
 
-    /*
-    @GetMapping
-    @ApiOperation(value = "listar  busqueda",  response = Hero.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Heroes encontrados existosamente"),
-            @ApiResponse(code = 400, message = "La petición es invalida"),
-            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
-    public void searchHeroes(){
-        return heroService.
-    }
-*/
 
     @PutMapping
     @ApiOperation(value = "Actualizar heroe",  response = Hero.class)

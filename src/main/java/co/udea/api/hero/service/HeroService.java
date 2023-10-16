@@ -37,8 +37,8 @@ public class HeroService {
         return heroRepository.findAll();
     }
 
-    public void searchHeroe(){
-
+    public List<Hero> searchHeroe(String term){
+        return heroRepository.findByNameContaining(term);
     }
 
     public void deleteHeroe(Integer id) {
@@ -57,7 +57,6 @@ public class HeroService {
             hero1.setName(hero.getName());
             heroRepository.save(hero1);
         });
-
     }
 
 }
